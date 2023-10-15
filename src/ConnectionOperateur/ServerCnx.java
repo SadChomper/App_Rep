@@ -5,36 +5,47 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerCnx {
-    public static void  main(String[] args){
-        try(ServerSocket ss = new ServerSocket(1234))
+    public static void main(String[] args) {
+        try (ServerSocket ss = new ServerSocket(1234)) 
         {
+            // Attendre un client a connecter
             Socket clientSocket = ss.accept();
 
+            // Définir l'adresse IP et le port du serveur
             InputStream input = clientSocket.getInputStream();
-            OutputStream output = clientSocket.getOutputStream();
-            InputStreamReader isr = new InputStreamReader(input);
-            BufferedReader br = new BufferedReader(isr);
+            ObjectInputStream oi = new ObjectInputStream(input);
 
-            int op1 = Integer.parseInt(br.readLine());
-            int op2 = Integer.parseInt(br.readLine());
-            String op = br.readLine();
+            // Lire l'objet reçu (Opération)
+            Operation op = (Operation) oi.readObject();
 
-            int resultat = 0;
-            switch(op)
-            {
-                case "+" : resultat = op1 + op2;break;
-                case "-" : resultat = op1 - op2;break;
-                case "*" : resultat = op1 * op2;break;
-                case "/" : resultat = op1 / op2;break;
+            // Extraire les données nécessaires de l'objet de l'opération
+            int op1 = op.getOp1();
+            int op2 = op.getOp2();
+            char ops = op.getOp();
+
+            int result = 0;
+
+            // Effectuer l'opération demandée
+            switch (ops) {
+                case '+': result = op1 + op2; break;
+                case '-': result = op1 - op2; break;
+                case '*': result = op1 * op2; break;
+                case '/': result = op1 / op2; break;
             }
-            
-            PrintWriter pw = new PrintWriter(output,true);
-            pw.println(resultat);
-        }
-        catch (IOException e) 
-        {
-            System.out.println("here");
+
+            // Stocker le résultat dans l'objet Operation
+            op.setRes(result);
+
+            // Configuration du flux de sortie pour l'envoi de l'objet Operation modifié
+            OutputStream output = clientSocket.getOutputStream();
+            ObjectOutputStream oo = new ObjectOutputStream(output);
+
+            // Renvoyer l'objet Operation modifié au client
+            oo.writeObject(op);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("An error occurred: " + e.getMessage());
             throw new RuntimeException(e);
-        };
+        }
     }
 }

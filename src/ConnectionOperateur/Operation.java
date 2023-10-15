@@ -2,45 +2,35 @@ package ConnectionOperateur;
 
 import java.io.Serializable;
 
-public class Operation implements Serializable{
-	
-	private int op1;
-	private int op2;
-	private int result;
-	private char op;	//'+' '-' '*' '/'
-	
-	//Constructors
-	public Operation (int op1, int op2, int result, char op) {
-		super();
-		this.op1 = op1;
-		this.op2 = op2;
-		this.result = result;
-		this.op = op;
-	}
-	
-	//getters + setters
-	public int getOp1() {
-		return op1;
-	}
+public class Operation implements Serializable {
+    private int op1;
+    private int op2;
+    private char op;
+    private int res;
 
-	public int getOp2() {
-		return op2;
-	}
+    public Operation(int nb1, int nb2, char op){
+        this.op1 = nb1;
+        this.op2 = nb2;
+        this.op = op;
+    }
 
-	public int getResult() {
-		return result;
-	}
+    public int getOp1(){
+        return op1;
+    }
 
-	public void setResult(int result) {
-		this.result = result;
-	}
+    public int getOp2(){
+        return op2;
+    }
 
-	public char getOp() {
-		return op;
-	}
+    public char getOp(){
+        return op;
+    }
 
-	public void setOp(char op) {
-		this.op = op;
-	}
-	
+    public void setRes(int res){
+        this.res = res;
+    }
+
+    public int getRes(){
+        return res;
+    }
 }
