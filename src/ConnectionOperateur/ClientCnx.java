@@ -18,12 +18,12 @@ public class ClientCnx {
             // Se connecter au serveur
             clientSocket.connect(serverSocketAddress);
 
-            // Mise en place d'un flux de sortie pour l'envoi d'un objet Operation au serveur
+            // Creation du flux de sortie pour l'envoi d'un objet Operation au serveur
             OutputStream output = clientSocket.getOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(output);
 
-            // Créer un objet Opération (16 * 39)
-            Operation op = new Operation(16, 39, '*');
+            // Créer un objet Opération (9 - 4)
+            Operation op = new Operation(9, 4, '-');
 
             // Envoi de l'objet Operation au serveur
             os.writeObject(op);
@@ -36,11 +36,18 @@ public class ClientCnx {
             op = (Operation) is.readObject();
 
             // Afficher la resultat
-            System.out.println("Result received from the server: " + op.getRes());
+            System.out.println("Resultat reçu du serveur: " + op.getRes());
             
-        } catch (Exception e) {
-            System.out.println("Client: An error occurred - " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("erreur");
             throw new RuntimeException(e);
         }
+        
+        /*METHODE PLUS COURT
+        init: int nb1, nb2; char op;
+        new ObjectOutputStream (clientSocket.getOutputStream()).writeObject(new Operation(nb1,nb2,op)
+        
+        System.out.println(nb1+" "+op+" "+nb2+"="+((Operation)(new ObjectInputStream(clientSocket.getInputStream())).readObject())).getResult());
+        */
     }
 }

@@ -33,7 +33,7 @@ public class Server2 {
         }
         catch (IOException e) 
         {
-            System.out.println("here");
+            System.out.println("erreur");
             throw new RuntimeException(e);
         };
     }

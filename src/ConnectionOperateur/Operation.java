@@ -3,8 +3,8 @@ package ConnectionOperateur;
 import java.io.Serializable;
 
 public class Operation implements Serializable {
-    private int op1;
-    private int op2;
+    private int nb1;
+    private int nb2;
     private char op;
     private int res;
 
@@ -14,12 +14,12 @@ public class Operation implements Serializable {
         this.op = op;
     }
 
-    public int getOp1(){
-        return op1;
+    public int getNb1(){
+        return nb1;
     }
 
-    public int getOp2(){
-        return op2;
+    public int getNb2(){
+        return nb2;
     }
 
     public char getOp(){
