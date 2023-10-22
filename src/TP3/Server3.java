@@ -26,8 +26,10 @@ public class Server3 extends Thread {
 
 			// Cette boucle s'exécute en continu, attendant de nouvelles connexions clients.
 			while (true) {
-				Socket s = ss.accept(); // Attend qu'un client se connecte et accepte la connexion.
-				new ClientProcess(s, ++nombreClient).start(); // Crée un nouveau thread ClientProcess pour gérer le client.
+				// Attend qu'un client se connecte et accepte la connexion.
+				Socket s = ss.accept();
+				// Crée un nouveau thread ClientProcess pour gérer le client.
+				new ClientProcess(s, ++nombreClient).start();
 			}
 		}
 		catch (IOException e) {
@@ -46,8 +48,10 @@ public class Server3 extends Thread {
 
 		@Override
 		public void run() {
-			System.out.println("le client numero: " + numClient + " de l'adresse IP: " + s.getRemoteSocketAddress());
-			(new PrintWriter(s.getOutputStream(), true)).println("Bienvenue, vous êtes le client numéro " + numClient);
+			System.out.println("le client numero: " + numClient +
+					" de l'adresse IP: " + s.getRemoteSocketAddress());
+			(new PrintWriter(s.getOutputStream(), true)).
+					println("Bienvenue, vous êtes le client numéro " + numClient);
 		}
 	}
 }
