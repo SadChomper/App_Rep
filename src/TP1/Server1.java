@@ -20,7 +20,14 @@ public class Server1 {
     		InputStream input = clientSocket.getInputStream();
     		OutputStream output = clientSocket.getOutputStream();
 
-    		clientSocket.close();
+			//Le reçu du nombre d'après le client et le renvoie aprés une modification
+			int in = is.read();
+			in *= 5;
+			System.out.println(in);
+			output.write(in)
+
+			//Fermeture des sockets
+			clientSocket.close();
     		ss.close();
     	}
     	catch (IOException e) {
