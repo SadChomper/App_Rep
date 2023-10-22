@@ -47,5 +47,4 @@ public class Server3 extends Threads{
 		}
 	}
 }
-
 //fel cmd, nekteb: telnet localhost 1234
