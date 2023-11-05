@@ -55,8 +55,10 @@ public class Server3 extends Thread {
 					(new PrintWriter(s.getOutputStream(), true)).
 							println("Bienvenue, vous êtes le client numéro " + numClient);
 
-					ObjectInputStream oi = new ObjectInputStream(input);
+					//Intégrer le service de calculatrice dans le serveur multi-Threads en employant la
+					//communication C/S par objet
 
+					ObjectInputStream oi = new ObjectInputStream(input);
 					// Lire l'objet reçu
 					Operation op = (Operation) oi.readObject();
 
@@ -64,7 +66,6 @@ public class Server3 extends Thread {
 					int nb1 = op.getNb1();
 					int nb2 = op.getNb2();
 					char ops = op.getOp();
-
 					int result = 0;
 
 					// Effectuer l'opération demandée
