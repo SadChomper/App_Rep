@@ -10,25 +10,17 @@ public class Serveur {
         utilisant “InetSocketAddress” */
         int port = 1234;
         ArrayList<InetSocketAddress> clients = new ArrayList<>();
-
         try (DatagramSocket serverSocket = new DatagramSocket(port)) {
             System.out.println("Serveur en attente de connexions sur le port " + port);
 
             while (true) {
                 byte[] receiveData = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-
                 serverSocket.receive(receivePacket);
                 String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
                 InetSocketAddress clientAddress = (InetSocketAddress) receivePacket.getSocketAddress();
 
-                if (!clients.contains(clientAddress)) {
-                    clients.add(clientAddress);
-                    System.out.println("Nouveau client connecté depuis " +
-                            clientAddress.getAddress() + ":" + clientAddress.getPort());
-                }
-
-                // Envoyer le message à tous les clients, à l'exception de l'expéditeur
+                // 3. Envoyer le message à tous les clients, à l'exception de l'expéditeur
                 for (InetSocketAddress client : clients) {
                     if (!client.equals(clientAddress)) {
                         byte[] sendData = message.getBytes();
