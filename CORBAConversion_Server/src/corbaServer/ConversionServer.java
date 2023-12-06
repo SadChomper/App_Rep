@@ -14,7 +14,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class ConversionServer {
-    public static void main(String[] args) throws InvalidName, NamingException, WrongPolicy, ServantNotActive, AdapterInactive {
+    public static void main(String[] args) throws InvalidName, NamingException,
+            WrongPolicy, ServantNotActive, AdapterInactive {
         // Initialisation de l'ORB (Object Request Broker)
         ORB orb = ORB.init(args, null);
 
@@ -36,6 +37,4 @@ public class ConversionServer {
         // Lancement de l'ORB pour écouter les demandes des clients
         orb.run();
     }
-    // start tnameserv
-    // befor staring server in the cmd dans le path src de projet
 }

@@ -1,7 +1,8 @@
 module corbaConversion {
     // Définition de l'interface IConversionRemote
     interface IConversionRemote {
-        // Déclaration d'une opération de conversion prenant un montant en entrée et retournant un montant converti
+        // Déclaration d'une opération de conversion prenant un
+        //montant en entrée et retournant un montant converti
         double conversionMontant(in float montant);
     };
 };

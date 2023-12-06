@@ -1,25 +1,22 @@
 package corbaClient;
-
 import corbaConversion.IConversionRemote;
 import corbaConversion.IConversionRemoteHelper;
-import org.omg.CORBA.ORB;
 import org.omg.CORBA.Object;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.Scanner;
-
 public class ConversionClient {
     public static void main(String[] args) throws NamingException {
         // Initialisation du contexte initial pour la communication avec le serveur CORBA
         Context ctx = new InitialContext();
 
         // Recherche de l'objet distant en utilisant le nom "CV" dans le contexte
-        Object ref = (Object) ctx.lookup("CV");
+        Object ref = (org.omg.CORBA.Object) ctx.lookup("CV");
 
         // Conversion de la référence de l'objet en une référence à l'interface IConversionRemote
-        IConversionRemote stub = IConversionRemoteHelper.narrow((Object) ref);
+        IConversionRemote stub = IConversionRemoteHelper.narrow(ref);
 
         // Initialisation d'un scanner pour lire les entrées utilisateur
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +29,7 @@ public class ConversionClient {
         System.out.println("Le montant avant conversion : " + montant);
 
         // Appel de la méthode distante pour effectuer la conversion du montant
-        double montantConverti = stub.conversionMontant(montant);
+        double montantConverti = stub.conversionMontant((float) montant);
 
         // Affichage du montant après conversion
         System.out.println("\nLe montant après conversion : " + montantConverti);
